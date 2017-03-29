@@ -9,6 +9,24 @@ Montanari, etc.
 
 For download and information, see http://class-code.net
 
+CLASS.FreeSF: Cosmic Linear Anisotropy Solving System for a free scalar field
+==============================================
+
+Amendment made by: L. Arturo Urena-Lopez
+
+with help from Alma X. Gonzalez-Morales and Francisco X. Linares Cedeño.
+
+For download see: 
+
+This particular version of the CLASS code was amended to solve the case of a free scalar field as a dark matter component, with potential (1/2) m^2 phi^2, using the formalism developed in the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', by L. Arturo Ureña-López and Alma X. Gonzalez-Morales, published in JCAP 1607 (2016) no.07, 048. See also https://arxiv.org/abs/1511.08195.
+
+The set up of the scalar field quantities follows closely the instructions of CLASS for scalar fields. The amended version works as usual for CDM only, or fro SFDM only, but also for a mixture of the two.
+
+The code CLASS.FreeSF works seamlessly with all other tools made and used by the original CLASS code.
+
+You can use CLASS.FreeSF freely, provided that in your publications you cite the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', JCAP 1607 (2016) no.07, 048, https://arxiv.org/abs/1511.08195
+
+==============================================
 
 Compiling CLASS and getting started
 -----------------------------------

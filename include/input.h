@@ -275,12 +275,6 @@ extern "C" {
   int compare_integers (const void * elem1, const void * elem2);
 
   int compare_doubles(const void *a,const void *b);
-  
-  double aosc_cubic(double aosc,double b3);
-  
-  double fmass(double theta1, double Omega1, double theta0, double lambda);
-  
-  double verify(double theta_ini, double Omega_ini, double theta0, double lambda);
 
 #ifdef __cplusplus
 }

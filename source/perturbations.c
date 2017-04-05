@@ -4206,7 +4206,6 @@ int perturb_initial_conditions(struct precision * ppr,
       if (pba->has_scf == _TRUE_) {
        
           /** Scalar field variables from the background */
-          //Omega_phi = ppw->pvecback[pba->index_bg_Omega_phi_scf];
           theta_phi = ppw->pvecback[pba->index_bg_theta_phi_scf];
           y1_phi = ppw->pvecback[pba->index_bg_y_phi_scf];
           

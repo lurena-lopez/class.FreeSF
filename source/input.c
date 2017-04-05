@@ -1014,7 +1014,7 @@ int input_read_parameters(
     /** - Initial conditions for scalar field variables */
     /** - Conversion of the boson mass into initial conditions */
     theta_ini = 0.4*15.64*pba->scf_parameters[1]/(pow(pba->Omega0_g+pba->Omega0_ur,0.5)*pba->H0);
-    /** - Solve the cubic equation by Newton-Raphson. It works for lambda >=0 */
+    /** - Find the scale factor at the start of field oscillations */
     aosc = pow((0.5*_PI_/theta_ini)/pow(1.+pow(_PI_,2)/36.,0.5),0.5);
     /** - Calculate pivot value of Omega_phi_init for the calculation of appropriate initial conditions */
     Omega_ini = pba->scf_parameters[pba->scf_tuning_index]+log(pba->Omega0_scf*1.e-14/(pow(aosc,3.)*(pba->Omega0_g+pba->Omega0_ur)));

@@ -18,11 +18,11 @@ with help from Alma X. Gonzalez-Morales and Francisco X. Linares Cedeño.
 
 For download see: 
 
-This particular version of the CLASS code was amended to solve the case of a free scalar field as a dark matter component (dubbed as ScalarFieldDarkMater, or SFDM for short), endowed with potential (1/2) m^2 phi^2, using the formalism developed in the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', by L. Arturo Ureña-López and Alma X. Gonzalez-Morales, published in JCAP 1607 (2016) no.07, 048. See also https://arxiv.org/abs/1511.08195.
+This particular version of the CLASS code was amended to solve the case of a free scalar field as a dark matter component (dubbed as ScalarFieldDarkMater, or SFDM for short), endowed with a potential (1/2) m^2 phi^2, and using the formalism developed in the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', by L. Arturo Ureña-López and Alma X. Gonzalez-Morales, published in JCAP 1607 (2016) no.07, 048. See also https://arxiv.org/abs/1511.08195.
 
-CLASS.FreeSF works as usual for CDM only, or for SFDM only, but also for a mixture of the two, as long as the Friedmann constraint is satisfied. Also, CLASS.FreeSF works seamlessly with all other tools made for and used by the original CLASS code.
+CLASS.FreeSF works as usual for CDM only, or for SFDM only, but also for a mixture of the two. Also, CLASS.FreeSF works seamlessly with all other tools made for and used by the original CLASS code.
 
-The set up scalar field quantities follows closely the instructions of CLASS for scalar fields, see item 8) in the file explanatory.ini. In particular, to have a run with SFDM proceed as indicated below.
+The set up of scalar field quantities follows closely the instructions of CLASS for scalar fields, see item 8) in the file explanatory.ini. In particular, to have a run with SFDM proceed as indicated below.
     1. Omega_cdm must be specified in item 5). 
         1a. Set Omega_cdm = 1.e-4 or smaller if a run is needed with SFDM as the only dark matter component. Beware that CLASS requires a non-zero value of Omega_cdm to correctly define the synchronous gauge of metric perturbations.
         1b. Otherwise set Omega_cdm to your preferred value, and the SFDM budget will be calcualted internally (see below).
@@ -39,7 +39,7 @@ For concrete examples, see the file lcdm.ini for a run with the standard cold da
 
 You can use CLASS.FreeSF freely, provided that in your publications you cite the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', JCAP 1607 (2016) no.07, 048, https://arxiv.org/abs/1511.08195
 
-(Below is the original CLASS documentation.)
+Below is the original CLASS documentation, that you must follow for instructions about installation and compilation of the code.
 
 ==============================================
 

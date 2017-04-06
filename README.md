@@ -16,7 +16,7 @@ Amendment made by: L. Arturo Urena-Lopez
 
 with help from Alma X. Gonzalez-Morales and Francisco X. Linares Cedeño.
 
-For download see: 
+For download see: https://github.com/lurena-lopez/class.FreeSF
 
 This particular version of the CLASS code was amended to solve the case of a free scalar field as a dark matter component (dubbed as ScalarFieldDarkMater, or SFDM for short), endowed with a potential (1/2) m^2 phi^2, and using the formalism developed in the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', by L. Arturo Ureña-López and Alma X. Gonzalez-Morales, published in JCAP 1607 (2016) no.07, 048. See also https://arxiv.org/abs/1511.08195.
 

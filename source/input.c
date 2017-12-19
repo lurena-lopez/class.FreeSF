@@ -1012,38 +1012,41 @@ int input_read_parameters(
     class_read_double("scf_shooting_parameter",pba->scf_parameters[pba->scf_tuning_index]);
 
     /** - Initial conditions for scalar field variables */
-    /** - Conversion of the boson mass into initial conditions */
-    theta_ini = 0.4*15.64*pba->scf_parameters[1]/(pow(pba->Omega0_g+pba->Omega0_ur,0.5)*pba->H0);
-    /** - Find the scale factor at the start of field oscillations */
-    aosc = pow((0.5*_PI_/theta_ini)/pow(1.+pow(_PI_,2)/36.,0.5),0.5);
-    /** - Calculate pivot value of Omega_phi_init for the calculation of appropriate initial conditions */
-    Omega_ini = pba->scf_parameters[pba->scf_tuning_index]+log(pba->Omega0_scf*1.e-14/(pow(aosc,3.)*(pba->Omega0_g+pba->Omega0_ur)));
-    /** - Set up initial conditions */
-    pba->Omega_phi_ini_scf = Omega_ini;
-    pba->theta_phi_ini_scf = theta_ini;
-
-    /** The initial condition for y1_phi_ini corresponds, or not, to the attractor value */
+    /** - First set up the initial value of y_1 = 2m/H (Conversion of the boson mass into initial conditions) */
+    pba->y_phi_ini_scf = 2.*15.64*pba->scf_parameters[0]/(pow(pba->Omega0_g+pba->Omega0_ur,0.5)*pba->H0);
+        
+    /** - Read if the user wants to use the attractor trajectory */
     class_call(parser_read_string(pfc,
-                                  "attractor_ic_scf",
-                                  &string1,
-                                  &flag1,
-                                  errmsg),
+                                    "attractor_ic_scf",
+                                    &string1,
+                                    &flag1,
+                                    errmsg),
                 errmsg,
                 errmsg);
-
-    if (flag1 == _TRUE_){
-      if((strstr(string1,"y") != NULL) || (strstr(string1,"Y") != NULL)){
-        pba->attractor_ic_scf = _TRUE_;
-        pba->y_phi_ini_scf = 5.*pba->theta_phi_ini_scf;
+        
+        if (flag1 == _TRUE_){
+            if((strstr(string1,"y") != NULL) || (strstr(string1,"Y") != NULL)){
+                pba->attractor_ic_scf = _TRUE_;
+                /** - Use the attractor trajectory for the inital value of the angular variable */
+                theta_ini = 0.4*15.64*pba->scf_parameters[0]/(pow(pba->Omega0_g+pba->Omega0_ur,0.5)*pba->H0);
+                /** - Find the scale factor at the start of field oscillations */
+                aosc = pow((0.5*_PI_/theta_ini)/pow(1.+pow(_PI_,2)/36.,0.5),0.5);
+                /** - Calculate pivot value of Omega_phi_init for the calculation of appropriate initial conditions */
+                Omega_ini = pba->scf_parameters[pba->scf_tuning_index]+log(pba->Omega0_scf*1.e-14/(pow(aosc,3.)*(pba->Omega0_g+pba->Omega0_ur)));
+                /** - Set up initial conditions */
+                pba->theta_phi_ini_scf = theta_ini;
+                pba->Omega_phi_ini_scf = Omega_ini;
+            }
+            else{
+                pba->attractor_ic_scf = _FALSE_;
+                class_test(pba->scf_parameters_size<2,
+                           errmsg,
+                           "Since you are not using the attractor initial conditions, you must use the  entry in scf_parameters. See explanatory.ini for more details.");
+                /** - Set up initial conditions */
+                pba->theta_phi_ini_scf = pba->scf_parameters[1];
+                pba->Omega_phi_ini_scf = log(pba->scf_parameters[2]);
+            }
         }
-      else{
-        pba->attractor_ic_scf = _FALSE_;
-        class_test(pba->scf_parameters_size<2,
-		   errmsg,
-		   "Since you are not using the attractor initial condition for y1_phi, you must specify it in the third entry in scf_parameters. See explanatory.ini for more details.");
-    	pba->y_phi_ini_scf = pba->scf_parameters[2];
-      }
-    }
     }
 
   /** (b) assign values to thermodynamics cosmological parameters */

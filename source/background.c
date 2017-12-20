@@ -1654,12 +1654,10 @@ int background_solve(
       printf(" Scalar field details:\n");
       printf(" -> Omega_scf = %g, wished = %g\n",
 	     exp(pvecback[pba->index_bg_Omega_phi_scf]), pba->Omega0_scf);
-      printf(" -> lambda_scf = %1.2e\n",
-               pba->scf_parameters[0]);
-      printf(" -> Mass_scf = %5.4e [1/Mpc], %5.4e [eV], %5.4e [H_0]\n",
-             0.5*pvecback[pba->index_bg_y_phi_scf]*pvecback[pba->index_bg_H], 3.19696e-30*pvecback[pba->index_bg_y_phi_scf]*pvecback[pba->index_bg_H], 0.5*pvecback[pba->index_bg_y_phi_scf]);
+      printf(" -> Mass_scf = %5.4e [eV], %5.4e [1/Mpc], %5.4e [H_0]\n",
+             3.19696e-30*pvecback[pba->index_bg_y_phi_scf]*pvecback[pba->index_bg_H], 0.5*pvecback[pba->index_bg_y_phi_scf]*pvecback[pba->index_bg_H], 0.5*pvecback[pba->index_bg_y_phi_scf]);
         printf(" -> wished = %1.2e [eV]\n",
-               pba->scf_parameters[1]);
+               pba->scf_parameters[0]);
     }
     if(pba->has_lambda == _TRUE_){
       printf(" Lambda details:\n");
@@ -2053,21 +2051,13 @@ int background_derivs(
       (-3.*sin_scf(pba,y[pba->index_bi_theta_phi_scf])+y[pba->index_bi_y_phi_scf]);
       
     dy[pba->index_bi_y_phi_scf] = y[pba->index_bi_a]*pvecback[pba->index_bg_H]*
-      (1.5*(1.+pvecback[pba->index_bg_w_tot])*y[pba->index_bi_y_phi_scf]
-       + y2_phi_scf(pba,y[pba->index_bi_Omega_phi_scf],y[pba->index_bi_theta_phi_scf],y[pba->index_bi_y_phi_scf])*
-       exp(0.5*y[pba->index_bi_Omega_phi_scf])*sin_scf(pba,0.5*y[pba->index_bi_theta_phi_scf]));
+      (1.5*(1.+pvecback[pba->index_bg_w_tot])*y[pba->index_bi_y_phi_scf]);
   }
 
 
   return _SUCCESS_;
 
 }
-
-/**
- * TODO:
- * - Add some functionality to include different models/potentials (tuning would be difficult, though)
- * - Generalize to Kessence/Horndeski/PPF and/or couplings
- */
 
 /** Cosine and sine modified functions to kill oscillations with a very high frequency */
 double cos_scf(struct background *pba,
@@ -2084,15 +2074,4 @@ double sin_scf(struct background *pba,
   double theta_thresh = 1.e2;
     double theta_tol = 1.;//1.e-2;
   return 0.5*(1.-tanh(theta_tol*(theta_phi*theta_phi-theta_thresh*theta_thresh)))*sin(theta_phi);
-}
-
-/** Second potential variable y2 for scalar field */
-double y2_phi_scf(struct background *pba,
-		  double Omega_phi,
-		  double theta,
-		  double y1_phi
-		  ) {
-  double scf_lambda = pba->scf_parameters[0];
-  //General expression for: axion (lambda >0), quadratic (lambda =0), cosh (lambda < 0)
-  return  scf_lambda*exp(0.5*Omega_phi)*cos_scf(pba,0.5*theta);
 }

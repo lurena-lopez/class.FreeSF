@@ -2251,11 +2251,7 @@ int perturb_solve(
 
       if (pba->has_scf == _TRUE_) {
       /* also check that the scf is slowly-rolling */
-      Omega_phi = ppw->pvecback[pba->index_bg_Omega_phi_scf];
-      theta_phi = ppw->pvecback[pba->index_bg_theta_phi_scf];
-      y1_phi = ppw->pvecback[pba->index_bg_y_phi_scf];
-      /** Following expression comes from a trigonometric-hyperbolic identity for mass_scf */
-      m_scf_over_H = 0.5*pow(pow(y1_phi,2.)+2.*y2_phi_scf(pba,Omega_phi,theta_phi,y1_phi)*exp(0.5*Omega_phi)*cos_scf(pba,0.5*theta_phi),0.5);
+      m_scf_over_H = 0.5*ppw->pvecback[pba->index_bg_y_phi_scf];
       
       if (m_scf_over_H > 1.e-2)
       is_early_enough = _FALSE_;
@@ -7239,18 +7235,15 @@ int perturb_derivs(double tau,
       delta1_scf = y[pv->index_pt_delta1_scf];
       
       /** ---> Equations of motion for omega */
-        dy[pv->index_pt_omega_scf] = a_prime_over_a*(1.5*pvecback[pba->index_bg_w_tot]-0.5-y2_phi_scf(pba,Omega_phi_scf,theta_phi_scf,y1_phi_scf)*
-        exp(0.5*Omega_phi_scf)*sin_scf(pba,0.5*theta_phi_scf)/y1_phi_scf)*y[pv->index_pt_omega_scf];
+        dy[pv->index_pt_omega_scf] = a_prime_over_a*(1.5*pvecback[pba->index_bg_w_tot]-0.5)*y[pv->index_pt_omega_scf];
       
-    /** ---> Equations of motion for the density contrasts */
+      /** ---> Equations of motion for the density contrasts */
         dy[pv->index_pt_delta0_scf] = -a_prime_over_a*((3.*sin_scf(pba,theta_phi_scf)+omega_scf*(1.-cos_scf(pba,theta_phi_scf)))*delta1_scf
                                                        -omega_scf*sin_scf(pba,theta_phi_scf)*delta0_scf)
                                                        -metric_continuity*(1.-cos_scf(pba,theta_phi_scf)); //metric_continuity = h'/2
         
-        dy[pv->index_pt_delta1_scf] = -a_prime_over_a*((3.*cos_scf(pba,theta_phi_scf)+omega_scf*sin_scf(pba,theta_phi_scf)
-        -exp(0.5*Omega_phi_scf)*sin_scf(pba,0.5*theta_phi_scf)*y2_phi_scf(pba,Omega_phi_scf,theta_phi_scf,y1_phi_scf)/y1_phi_scf)*delta1_scf
-                                                       -omega_scf*(1.+cos_scf(pba,theta_phi_scf)
-                                                       +exp(0.5*Omega_phi_scf)*cos_scf(pba,0.5*theta_phi_scf)*y2_phi_scf(pba,Omega_phi_scf,theta_phi_scf,y1_phi_scf)/y1_phi_scf)*delta0_scf)
+        dy[pv->index_pt_delta1_scf] = -a_prime_over_a*((3.*cos_scf(pba,theta_phi_scf)+omega_scf*sin_scf(pba,theta_phi_scf))*delta1_scf
+                                                       -omega_scf*(1.+cos_scf(pba,theta_phi_scf))*delta0_scf)
                                                        -metric_continuity*sin_scf(pba,theta_phi_scf); //metric_continuity = h'/2
     }
 

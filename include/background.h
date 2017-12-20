@@ -163,7 +163,6 @@ struct background
   int index_bg_Omega_phi_scf;       /**< scalar field density parameter */
   int index_bg_theta_phi_scf; /**< scalar field angular variable */
   int index_bg_y_phi_scf;         /**< scalar field y_1 variable */
-  int index_bg_y2_phi_scf;         /**< scalar field y_2 variable */
 
   int index_bg_rho_ncdm1;     /**< density of first ncdm species (others contiguous) */
   int index_bg_p_ncdm1;       /**< pressure of first ncdm species (others contiguous) */
@@ -465,10 +464,6 @@ extern "C" {
 			 );
 
   /** Scalar field variables. See background.c for more details. */
-/**  double w_phi_scf(struct background *pba,
-		   double theta
-		   );**/
-  
   double cos_scf(struct background *pba,
 		 double theta_phi
 		 );
@@ -476,19 +471,6 @@ extern "C" {
   double sin_scf(struct background *pba,
 		 double theta_phi
 		 );
-  
-  double y2_phi_scf(struct background *pba,
-		    double Omega_phi,
-		    double theta,
-		    double y1_phi
-		    );
-
-  /** Coupling between scalar field and matter **/
-/**  double Q_scf(
-               struct background *pba,
-               double phi,
-               double phi_prime
-               ); **/
 
 #ifdef __cplusplus
 }

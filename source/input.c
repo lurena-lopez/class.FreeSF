@@ -1044,7 +1044,7 @@ int input_read_parameters(
                            "Since you are not using the attractor initial conditions, you must use the  entry in scf_parameters. See explanatory.ini for more details.");
                 /** - Set up initial conditions */
                 pba->theta_phi_ini_scf = pba->scf_parameters[1];
-                pba->Omega_phi_ini_scf = log(pba->scf_parameters[2]);
+                pba->Omega_phi_ini_scf = pba->scf_parameters[pba->scf_tuning_index]+log(pba->scf_parameters[2]);
             }
         }
     }

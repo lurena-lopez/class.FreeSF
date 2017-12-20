@@ -31,10 +31,11 @@ The set up of scalar field quantities follows closely the instructions of CLASS 
         2b. Omega_fld must be specified.
         2c. Omega_scf must be set to a negative value, and CLASS will calculate it internally from the fulfillment of the Friedmann constraint.
     3. The scalar field parameters are given as entries in the row vector scf_parameters[] in item 8d). Here is a description of their meaning.
-        3a. scf_parameters[0]= 0. by default.
-        3b. scf_parameters[1]= boson mass in units of eV.
-        3c. scf_parameters[2]= initial value of the potential variable y1. The default value is the attractor solution, which is calculated internally. To modify this default behavior you must change item 8c) and then set scf_parameters[2] to your preferred initial value (do this under your own responsibility!).
-        3d. scf_parameters[2]= 1.e-2 is the default value of the tuning parameter, see also item 8e). This default value has been tested for an ample range of boson masses, but it can be changed if necessary.
+        3a. scf_parameters[0]= boson mass in units of eV.
+        3b. scf_parameters[1]= initial value of the angular variable theta. The default value is the attractor solution, which is calculated internally. To modify this default behavior you must change item 8c) and then set scf_parameters[1] to your preferred initial value (do this under your own responsibility!).
+        3c. scf_parameters[2]= initial value of the density parameter Omega_phi. The default value is the attractor solution, which is calculated internally. To modify this default behavior you must change item 8c) and then set scf_parameters[2] to your preferred initial value (do this under your own responsibility!).
+        3d. scf_parameters[3]= 1.e-2 is the default value of the tuning parameter, see also item 8e). This default value has been tested for an ample range of boson masses, but it can be changed if necessary.
+        
 For concrete examples, see the file lcdm.ini for a run with the standard cold dark matter model, and the file lsfdm.ini for a run with the scalar field fulfilling the dark matter budget. See the CLASS documentation for information to change other cosmological parameters.
 
 You can use CLASS.FreeSF freely, provided that in your publications you cite the paper 'Towards accurate cosmological predictions for rapidly oscillating scalar fields as dark matter', JCAP 1607 (2016) no.07, 048, https://arxiv.org/abs/1511.08195

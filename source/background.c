@@ -2063,15 +2063,17 @@ int background_derivs(
 double cos_scf(struct background *pba,
 		 double theta_phi
 		 ) {
-  double theta_thresh = 1.e2;
-    double theta_tol = 1.;//1.e-2;
-  return 0.5*(1.-tanh(theta_tol*(theta_phi*theta_phi-theta_thresh*theta_thresh)))*cos(theta_phi);
+    double theta_thresh = 30*_PI_ + 1/(30*_PI_); //1.e2;
+    //double theta_tol = 1.; //1.e-2;
+    return 0.5*(1.-tanh(theta_phi-theta_thresh))*cos(theta_phi);
+    //0.5*(1.-tanh(theta_tol*(theta_phi*theta_phi-theta_thresh*theta_thresh)))*cos(theta_phi);
 }
 
 double sin_scf(struct background *pba,
 		 double theta_phi
 		 ) {
-  double theta_thresh = 1.e2;
-    double theta_tol = 1.;//1.e-2;
-  return 0.5*(1.-tanh(theta_tol*(theta_phi*theta_phi-theta_thresh*theta_thresh)))*sin(theta_phi);
+    double theta_thresh = 30*_PI_ + 1/(30*_PI_);
+    //double theta_tol = 1.;//1.e-2;
+    return 0.5*(1.-tanh(theta_phi-theta_thresh))*sin(theta_phi);
+    //0.5*(1.-tanh(theta_tol*(theta_phi*theta_phi-theta_thresh*theta_thresh)))*sin(theta_phi);
 }
